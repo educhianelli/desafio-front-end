@@ -1,0 +1,56 @@
+<form (ngSubmit)="filtrarCliente()">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h1>Cliente</h1>
+    </div>
+    <div class="ui-g-5 input-group">
+      <span class="input-group-addon input-group">
+        <label>Nome </label>
+      </span>
+      <input pattern="[a-zA-Z0-9]" pInputText minlength="3" maxlength="100" type="text" class="form-control" name="nome" placeholder="Insira o nome"
+        [(ngModel)]="nome">
+      <!--           <div *ngIf="nome.hasError('required') && nome.touched && nome.dirty" >Informe um nome válido</div>
+     --></div>
+    <div class="ui-g-5 input-group">
+      <span class="input-group-addon input-group">
+        <label>CPF </label>
+      </span>
+      <input pInputText mask="000.000.000-00" type="text" class="form-control" name="cpf" placeholder="Insira o CPF" [(ngModel)]="cpf">
+    </div>
+    <div class="ui-g-2">
+      <button pButton type="submit" label="Pesquisar" (click)="filtrarCliente()"></button>
+    </div>
+  </div>
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-table id="tabelaCliente"  [value]="clientes" [paginator]="true" [rows]="3" [responsive]=true emptyMessage="Nenhum registro corresponde a sua pesquisa">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th *ngIf="auth.temPermissao('ROLE_ADMIN')" class="col-actions"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-cliente>
+          <tr>
+            <td class="col-aling">{{cliente.nome}}</td>
+            <td class="col-aling" mask="000.000.000-00">{{cliente.cpf | mask: '000.000.000-00'}}</td>
+            <td *ngIf="auth.temPermissao('ROLE_ADMIN')">
+              <a pButton  *ngIf="auth.temPermissao('ROLE_ADMIN')" type="button" pTooltip="editar" tooltipPosition="top" icon="pi pi-pencil" class="ui-button-info" [routerLink]="['/clientes',cliente.id]"></a>
+              <button pButton *ngIf="auth.temPermissao('ROLE_ADMIN')" type="button" pTooltip="excluir" tooltipPosition="top" icon="pi pi-trash" class="ui-button-danger" (click)="excluir(cliente)"></button>
+            </td>
+          </tr>
+        </ng-template>
+
+      </p-table>
+
+<!--       {{cliente | json}}
+ -->
+      <div class="ui-g-12">
+        <a pButton label="Novo Cliente" *ngIf="auth.temPermissao('ROLE_ADMIN')"
+        routerLink="/clientes/novo"></a>
+      </div>
+    </div>
+  </div>
+</form>

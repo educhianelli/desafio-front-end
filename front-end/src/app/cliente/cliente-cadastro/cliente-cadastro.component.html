@@ -1,0 +1,164 @@
+<!-- {{cliente | json}}
+ -->
+
+<!-- <div *ngIf="clienteForm.invalid" class="alert alert-danger">
+  Preencha todos os campos corretamente.
+</div> -->
+
+
+
+
+<form #clienteForm="ngForm">
+  <div *ngIf="nome.hasError('required') && nome.touched" class="alert alert-danger">Informe um 'Nome' válido</div>
+  <div *ngIf="nome.hasError('minlength') && nome.touched" class="alert alert-danger">O 'Nome' deve possuir no mínimo 3 caracteres</div>
+  <div *ngIf="cpf.hasError('required') && cpf.touched" class="alert alert-danger">Informe um 'CPF' válido</div>
+  <div *ngIf="cpf.hasError('minlength') && cpf.touched" class="alert alert-danger">O 'CPF' deve possuir 11 caracteres</div>
+  <div *ngIf="cep.hasError('minlength') && cep.touched" class="alert alert-danger">O 'CEP' deve possuir 08 caracteres</div>
+  <div *ngIf="cep.hasError('required') && cep.touched" class="alert alert-danger">Informe um 'CEP' válido</div>
+  <div *ngIf="bairro.hasError('required') && bairro.touched" class="alert alert-danger">Informe um 'Bairro' válido</div>
+  <div *ngIf="logradouro.hasError('required') && logradouro.touched" class="alert alert-danger">Informe um 'Logradouro' válido</div>
+  <div *ngIf="uf.hasError('required') && uf.touched" class="alert alert-danger">Informe uma 'UF' válida</div>
+  <div *ngIf="estado.hasError('required') && estado.touched" class="alert alert-danger">Informe uma 'UF' válida</div>
+
+
+<!--   <div *ngIf="email.hasError('required') && email.touched" class="alert alert-danger">Informe uma 'E-mail' válida</div>
+ -->
+
+
+
+
+<!--    <div *ngIf="email.hasError('minlength') && email.touched" class="alert alert-danger">Informe um email válido</div>
+ --> 
+
+  <div class="ui-g-12">
+    <h1>{{editando?'Edição de': 'Novo'}} Cliente</h1>
+  </div>
+  <div class="ui-g-12">
+    <div class="ui-g-12 input-group">
+      <span class="input-group-addon input-group">
+        <label class="form-control-label">Nome </label>
+      </span>
+      <input pInputText type="text" class="form-control" name="nome" placeholder="Insira o nome" [(ngModel)]="cliente.nome" required
+        minlength="3" maxlength="100" #nome="ngModel">
+    </div>
+
+  </div>
+
+
+  <div class="ui-g-12">
+    <div class="ui-g-12 input-group">
+      <span class="input-group-addon input-group">
+        <label class="form-control-label">CPF </label>
+      </span>
+      <input pInputText minlength="11" #cpf="ngModel" mask="000.000.000-00" type="text" class="form-control" name="cpf" placeholder="Insira o CPF"
+        [(ngModel)]="cliente.cpf" required>
+    </div>
+
+
+
+  </div>
+  <!--   <div class="ui-g-12 input-group" *ngFor="let em of emails; let in=index">
+    <span class="input-group-addon input-group">
+      <label>Email </label>
+    </span>
+    <input pInputText placeholder="exemplo@email.com" (blur)="onBlurEmail($event.target.value)" type="text" class="form-control"
+      name="email{{in}}" [(ngModel)]="emails[in].email">
+    <span class="input-group-btn">
+      <button pButton type="submit" icon="pi pi-plus" (click)="adicionaEmail()"></button>
+      <button pButton type="submit" icon="pi pi-trash" class="ui-button-danger" (click)="removeEmail()"></button>
+    </span>
+  </div> -->
+
+  <div class="input-group ui-g-9" ngModelGroup="email" *ngFor="let em of emails; let in=index">
+    <span class="input-group-addon">
+      <label class="form-control-label">Email</label>
+    </span>
+    <input #email="ngModel" type="text" [(ngModel)]="emails[in].email" name="email{{in}}" class="form-control" 
+    (blur)="onBlurEmail($event.target.value)" />
+    <span class="input-group-btn">
+      <button pButton icon="pi pi-plus" (click)="adicionaEmail()"></button>
+      <button pButton icon="pi pi-trash" class="ui-button-danger" (click)="removeEmail()"></button>
+    </span>
+  </div>
+
+
+
+  <div>
+    <div ngModelGroup="endereco">
+      <div class="ui-g-4 input-group ">
+        <span class="input-group-addon">
+          <label class="form-control-label">CEP </label>
+        </span>
+        <input pInputText mask="00.000-000" id="cep" name='cep' type="text" (blur)="getEndereco($event.target.value,clienteForm)"
+          class="form-control" placeholder="Insira o CEP" [(ngModel)]="cliente.endereco.cep" #cep="ngModel" minlength="8" required />
+      </div>
+      <div class="ui-g-4 input-group">
+        <span class="input-group-addon">
+          <label class="form-control-label">Bairro </label>
+        </span>
+        <input pInputText type="text" id="bairro" class="form-control" name="bairro" placeholder="Insira o bairro" 
+        [(ngModel)]="cliente.endereco.bairro" #bairro="ngModel" required>
+      </div>
+      <div class="ui-g-4 input-group  ">
+        <span class="input-group-addon">
+          <label class="form-control-label">Logradouro </label>
+        </span>
+        <input pInputText type="text" id="logradouro" class="form-control" name="logradouro" placeholder="Insira o logradouro"
+         [(ngModel)]="cliente.endereco.logradouro" #logradouro="ngModel" required>
+      </div>
+      <div class="ui-g-3 input-group">
+        <span class="input-group-addon">
+          <label>Estado </label>
+        </span>
+        <input pInputText type="text" id="estado" class="form-control" name="estado"
+         placeholder="Insira o estado" [(ngModel)]="cliente.endereco.localidade" #estado="ngModel" required>
+
+      </div>
+      <div class="ui-g-5 input-group">
+        <span class="input-group-addon">
+          <label>UF </label>
+        </span>
+        <input pInputText type="text" id="uf" class="form-control" name="uf" placeholder="Insira a UF"
+         [(ngModel)]="cliente.endereco.uf" #uf="ngModel" required>
+      </div>
+    </div>
+
+    <div class="ui-g-12 input-group">
+      <span class="input-group-addon input-group">
+        <label>Complemento </label>
+      </span>
+      <input pInputText type="text" id="complemento" class="form-control" name="complemento" placeholder="Insira o complemento"
+        [(ngModel)]="cliente.endereco.complemento">
+
+    </div>
+  </div>
+
+  <div class="input-group ui-g-9" ngModelGroup="telefone" *ngFor="let tel of telefones; let in=index">
+
+    <span class="input-group-addon">
+      <label>Tipo Telefone</label>
+    </span>
+    <p-dropdown class="dropdown-menu" [options]="tiposTelefones" [(ngModel)]="telefones[in].tipoTelefone" name="tipoTelefone{{in}}"
+      class="form-control" #tipotelefone="ngModel" required></p-dropdown>
+    <span class="input-group-addon">
+      <label>Telefone</label>
+    </span>
+    <input type="text" (focus)="onBlurVerificaMascara()" mask="{{validaMascaraTelefone}}" [(ngModel)]="telefones[in].numero"
+      name="numero{{in}}" class="form-control" #name="ngModel" (blur)="onBlurTelefone($event.target.value)" #telefone="ngModel" required/>
+    <span class="input-group-btn">
+      <button pButton icon="pi pi-plus" (click)="adicionaTelefone()"></button>
+      <button pButton icon="pi pi-trash" class="ui-button-danger" (click)="removeTelefone()"></button>
+    </span>
+  </div>
+
+  <!--  <div class="ui-g-12">
+            <label class="form-control-label">Telefone </label>
+            <p-dropdown [options]="tiposTelefones" [(ngModel)]="selectedTelefone" optionLabel="name"></p-dropdown>
+          </div> -->
+  <div class="ui-g-12">
+    <button pButton [disabled]="!clienteForm.valid" type="submit" label="Salvar" (click)="salvar(cliente)"></button>
+    <a pButton label="Voltar" routerLink="/clientes"></a>
+
+  </div>
+
+</form>
