@@ -1,4 +1,4 @@
-import { AuthService } from './../cliente/seguranca/auth.service';
+import { AuthService } from './../seguranca/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

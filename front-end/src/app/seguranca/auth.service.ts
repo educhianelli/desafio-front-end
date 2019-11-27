@@ -1,10 +1,10 @@
+import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { JwtHelper } from 'angular2-jwt';
 import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 
 import { Injectable } from '@angular/core';
-import { Router } from '../../../../node_modules/@angular/router';
 
 
 @Injectable({

@@ -1,5 +1,5 @@
-import { AuthService } from './cliente/seguranca/auth.service';
-import { LoginFormComponent } from './cliente/seguranca/login-form/login-form.component';
+import { AuthService } from './seguranca/auth.service';
+import { LoginFormComponent } from './seguranca/login-form/login-form.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'

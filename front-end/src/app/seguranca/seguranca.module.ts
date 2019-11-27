@@ -1,8 +1,8 @@
+import { ClienteService } from './../cliente/cliente.service';
+import { ClientePesquisaComponent } from './../cliente/cliente-pesquisa/cliente-pesquisa.component';
+import { ClienteCadastroComponent } from './../cliente/cliente-cadastro/cliente-cadastro.component';
+import { NavbarComponent } from './../navbar/navbar.component';
 import { AuthService } from './auth.service';
-import { ClienteService } from './../cliente.service';
-import { ClientePesquisaComponent } from './../cliente-pesquisa/cliente-pesquisa.component';
-import { ClienteCadastroComponent } from './../cliente-cadastro/cliente-cadastro.component';
-import { NavbarComponent } from './../../navbar/navbar.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,7 +25,6 @@ import { NgxMaskModule, IConfig } from 'ngx-mask'
 
  
 import {InputMaskModule} from 'primeng/inputmask';
-import { Promise } from '../../../../node_modules/@types/q';
 
 
 

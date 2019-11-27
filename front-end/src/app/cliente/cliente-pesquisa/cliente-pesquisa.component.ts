@@ -1,6 +1,6 @@
-import { AuthService } from './../seguranca/auth.service';
+import { AuthService } from './../../seguranca/auth.service';
 import { ClienteFiltro } from '../cliente.service';
-import { Cliente } from '../model/cliente.model';
+import { Cliente } from './../../model/cliente.model';
 import { Component, OnInit } from '@angular/core';
 import { ClienteService } from '../cliente.service';
 

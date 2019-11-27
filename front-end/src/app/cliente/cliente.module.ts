@@ -1,6 +1,6 @@
 import { RequestOptions, Http } from '@angular/http';
 import { AuthHttp, JwtHelper, AuthConfig } from 'angular2-jwt';
-import { AuthService } from './seguranca/auth.service';
+import { AuthService } from '../seguranca/auth.service';
 import { RouterModule } from '@angular/router';
 import { ClienteService } from './cliente.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,7 +25,7 @@ import { ClientePesquisaComponent } from './cliente-pesquisa/cliente-pesquisa.co
 import { ClienteCadastroComponent } from './cliente-cadastro/cliente-cadastro.component';
 import { NavbarComponent } from '../navbar/navbar.component';
 import {InputMaskModule} from 'primeng/inputmask';
-import { LoginFormComponent } from './seguranca/login-form/login-form.component';
+import { LoginFormComponent } from '../seguranca/login-form/login-form.component';
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions  ){
