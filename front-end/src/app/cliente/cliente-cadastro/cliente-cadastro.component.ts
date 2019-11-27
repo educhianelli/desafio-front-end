@@ -1,8 +1,8 @@
-import { Email } from '../email.model';
-import { Telefone } from '../telefone-model';
-import { Endereco } from '../endereco.model';
+import { Email } from '../model/email.model';
+import { Telefone } from '../model/telefone-model';
+import { Endereco } from '../model/endereco.model';
 import { map, catchError } from 'rxjs/operators';
-import { Cliente } from '../cliente.model';
+import { Cliente } from '../model/cliente.model';
 import { ClienteService } from '../cliente.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Form } from '@angular/forms';

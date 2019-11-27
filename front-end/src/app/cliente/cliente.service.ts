@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Cliente } from './cliente.model';
+import { Cliente } from './model/cliente.model';
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { AppService } from '../app.service';
